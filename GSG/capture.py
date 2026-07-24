@@ -6,7 +6,7 @@
 #
 # GNU Radio Python Flow Graph
 # Title: Not titled yet
-# GNU Radio version: 3.10.12.0
+# GNU Radio version: 3.10.9.2
 
 from PyQt5 import Qt
 from gnuradio import qtgui
@@ -23,7 +23,6 @@ from gnuradio import eng_notation
 import osmosdr
 import time
 import sip
-import threading
 
 
 
@@ -50,7 +49,7 @@ class capture(gr.top_block, Qt.QWidget):
         self.top_grid_layout = Qt.QGridLayout()
         self.top_layout.addLayout(self.top_grid_layout)
 
-        self.settings = Qt.QSettings("gnuradio/flowgraphs", "capture")
+        self.settings = Qt.QSettings("GNU Radio", "capture")
 
         try:
             geometry = self.settings.value("geometry")
@@ -58,7 +57,6 @@ class capture(gr.top_block, Qt.QWidget):
                 self.restoreGeometry(geometry)
         except BaseException as exc:
             print(f"Qt GUI: Could not restore geometry: {str(exc)}", file=sys.stderr)
-        self.flowgraph_started = threading.Event()
 
         ##################################################
         # Variables
@@ -127,7 +125,7 @@ class capture(gr.top_block, Qt.QWidget):
         self.osmosdr_source_0.set_bb_gain(20, 0)
         self.osmosdr_source_0.set_antenna('', 0)
         self.osmosdr_source_0.set_bandwidth(0, 0)
-        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_gr_complex*1, 'C:\\Users\\127CPB\\Documents\\HackRF_SDR_Dev_Files\\car_remote_sink', False)
+        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_gr_complex*1, '/home/ryan/SDR/GSG/remote_sink', False)
         self.blocks_file_sink_0.set_unbuffered(False)
 
 
@@ -139,7 +137,7 @@ class capture(gr.top_block, Qt.QWidget):
 
 
     def closeEvent(self, event):
-        self.settings = Qt.QSettings("gnuradio/flowgraphs", "capture")
+        self.settings = Qt.QSettings("GNU Radio", "capture")
         self.settings.setValue("geometry", self.saveGeometry())
         self.stop()
         self.wait()
@@ -172,7 +170,6 @@ def main(top_block_cls=capture, options=None):
     tb = top_block_cls()
 
     tb.start()
-    tb.flowgraph_started.set()
 
     tb.show()
 

@@ -66,7 +66,7 @@ blocks:
     alias: ''
     append: 'False'
     comment: ''
-    file: C:\Users\127CPB\Documents\HackRF_SDR_Dev_Files\car_remote_sink
+    file: /home/ryan/SDR/GSG/remote_sink
     type: complex
     unbuffered: 'False'
     vlen: '1'
@@ -522,4 +522,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: 3.10.12.0
+  grc_version: 3.10.9.2
