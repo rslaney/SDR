@@ -159,7 +159,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1032, 112.0]
+    coordinate: [1160, 192.0]
     rotation: 0
     state: enabled
 - name: osmosdr_source_0
